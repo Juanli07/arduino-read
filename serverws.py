@@ -3,7 +3,7 @@ import socket, json, time, os
 
 access = accessToDB.accesSql("localhost", "root", "", "acdb")
 my_socket = socket.socket()
-my_socket.bind((socket.gethostname(), 8000))
+my_socket.bind(('0.0.0.0', 8000))
 my_socket.listen(5)
 print("[*] socket online in {}".format(socket.gethostname()))
 
