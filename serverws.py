@@ -11,7 +11,8 @@ try:
     while True:
         con, addr =my_socket.accept()
         print('[*] New connection established from {}'.format(addr))
-        data = access.select("ac")
+        date = con.recv(1024).decode()
+        data = access.selectRegforhour(date)
         send_data = json.dumps(data)
 
         if(con.send(send_data.encode())):
