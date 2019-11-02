@@ -147,7 +147,7 @@ class accesSql:
         try:
             connection = mysql.connector.connect(host=self.host, user=self.user, passwd=self.__passwd, db=self.db)
             cursor = connection.cursor()
-            sql_query = "SELECT FROM regforhour WHERE SUBSTRING(date, 1, 10) = '{}';".format(date)
+            sql_query = "SELECT * FROM regforhour WHERE SUBSTRING(date, 1, 10) = '{}';".format(date)
             cursor.execute(sql_query)
             data = cursor.fetchall()
             return data

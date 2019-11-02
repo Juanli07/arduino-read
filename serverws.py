@@ -1,5 +1,9 @@
 from db import accessToDB
-import socket, json, time, os
+import socket, json, time, os, datetime
+
+def myconverter(o):
+    if isinstance(o, datetime.datetime):
+        return o.__str__()
 
 access = accessToDB.accesSql("localhost", "root", "", "acdb")
 my_socket = socket.socket()
@@ -13,7 +17,8 @@ try:
         print('[*] New connection established from {}'.format(addr))
         date = con.recv(1024).decode()
         data = access.selectRegforhour(date)
-        send_data = json.dumps(data)
+        
+        send_data = json.dumps(data, default = myconverter)
 
         if(con.send(send_data.encode())):
             print('[*] {}'.format(con.recv(1024).decode()))
