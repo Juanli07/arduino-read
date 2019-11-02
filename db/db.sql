@@ -15,6 +15,7 @@ CREATE TABLE ac(
 
 CREATE TABLE regforhour(
     id_ac VARCHAR(3),
+    temperature FLOAT(2.2),
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, --TIMESTAMP is YYYY-MM-DD HH:MM:SS
     status INT(1),
     motionsen INT(2),

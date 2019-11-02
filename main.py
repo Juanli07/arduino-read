@@ -11,7 +11,7 @@ try:
         if(read):
             temp = float(read[4:9])
             state = int(read[2])
-            instance.insertRegForHour('G81', state, state)
+            instance.insertRegForHour('G81', temp, state, state)
             
 except KeyboardInterrupt:
     print('\nSaliendo...')
