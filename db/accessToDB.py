@@ -67,7 +67,7 @@ class accesSql:
         try:
 
             connection = mysql.connector.connect(host = self.host, user = self.user, passwd = self.__passwd, db = self.db)
-            mySql_insert_query = """INSERT INTO regforhour VALUES("{}", "{}",  {},"{}", "{}");""".format(id_ac, temp "null", status, motion)
+            mySql_insert_query = """INSERT INTO regforhour VALUES("{}", "{}",  {},"{}", "{}");""".format(id_ac, temp, "null", status, motion)
             cursor = connection.cursor()
             result = cursor.execute(mySql_insert_query)
             connection.commit()
