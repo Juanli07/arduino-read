@@ -12,6 +12,8 @@ try:
             temp = float(read[4:9])
             state = int(read[2])
             instance.insertRegForHour('G81', temp, state, state)
+            print("[* ] DATOS INSERTADOS")
+            print("[ *] ID_AC = {}, Temperatura : {}, Estado(on/of): {}, sensor de movimiento: {}".format("G81", temp, state, estate))
             
 except KeyboardInterrupt:
     print('\nSaliendo...')
