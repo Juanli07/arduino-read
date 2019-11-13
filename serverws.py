@@ -15,17 +15,12 @@ try:
     while True:
         con, addr =my_socket.accept()
         print('[*] New connection established from {}'.format(addr))
-        date = con.recv(1024).decode()
-        data = access.selectRegforhour(date)
-        
-        send_data = json.dumps(data, default = myconverter)
-
-        if(con.send(send_data.encode())):
-            print('[*] {}'.format(con.recv(1024).decode()))
-            con.close()
-        else:
-            print('[!] Error sending data')
-
+        resp = con.recv(1024).decode()
+        data = json.loads(resp)
+        if(data):
+            con.send('[ * ] Information received'.encode())
+            for row in data:
+                access.insertRegForHour('{}, {}, {}, {}'.format(row[0], row[2], row[3], row[4]))
 except KeyboardInterrupt:
     print('\nSaliendo..')
 finally:
