@@ -20,7 +20,8 @@ try:
         if(data):
             con.send('[ * ] Information received'.encode())
             for row in data:
-                access.insertRegForHour('{}, {}, {}, {}'.format(row[0], row[2], row[3], row[4]))
+                access.insertRegForHour(row[0], row[1], row[3], row[4])
+                print(" {}, {}, {}, {}, {}".format(row[0], row[1], row[2], row[3], row[4]))
 except KeyboardInterrupt:
     print('\nSaliendo..')
 finally:
