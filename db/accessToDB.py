@@ -61,6 +61,27 @@ class accesSql:
                     connection.close()
                     print("close connection")
                     accesSql.cleanTerminal()
+                    
+    def insertRegForHourr(self, id_ac, temp, status, motion, sended):
+        try:
+
+            connection = mysql.connector.connect(host = self.host, user = self.user, passwd = self.__passwd, db = self.db)
+            mySql_insert_query = """INSERT INTO regforhour VALUES("{}", "{}",  {},"{}", "{}", "{}");""".format(id_ac, temp, "null", status, motion, sended)
+            cursor = connection.cursor()
+            result = cursor.execute(mySql_insert_query)
+            connection.commit()
+            print("Inserted data")
+            cursor.close()
+
+        except mysql.connector.Error as error:
+            print("error, data no inserted")
+            print(error)
+
+        finally:
+            if(connection.is_connected()):
+                connection.close()
+                print("close connection")
+                accesSql.cleanTerminal() 
 
 
     def insertRegForHour(self, id_ac, temp, status, motion):
@@ -147,9 +168,12 @@ class accesSql:
         try:
             connection = mysql.connector.connect(host=self.host, user=self.user, passwd=self.__passwd, db=self.db)
             cursor = connection.cursor()
-            sql_query = "SELECT * FROM regforhour WHERE SUBSTRING(date, 1, 10) = '{}';".format(date)
+            sql_query = "SELECT * FROM regforhour WHERE SUBSTRING(date, 1, 10) = '{}' and sended = 0;".format(date)
             cursor.execute(sql_query)
             data = cursor.fetchall()
+            sql_update_query = """UPDATE regforhour set sended = 1 WHERE sended = 0;"""
+            cursor.execute(sql_update_query)
+            connection.commit()
             return data
         except Error as e:
             print("Error reading data from table")

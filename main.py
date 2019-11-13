@@ -18,14 +18,14 @@ try:
         if(read):
             temp = float(read[4:9])
             state = int(read[2])
-            instance.insertRegForHour('G81', temp, state, state)
+            instance.insertRegForHourr('G81', temp, state, state, 0)
             print("[* ] DATOS INSERTADOS")
             print("[ *] ID_AC = {}, Temperatura : {}, Estado(on/of): {}, sensor de movimiento: {}".format("G81", temp, state, state))
 
             send_data = json.dumps(instance.selectRegforhour(today), default=myconverter)
             my_socket = socket.socket()
 
-            my_socket.connect(('192.168.0.16', 8000))
+            my_socket.connect(('192.168.0.11', 8000))
             if(my_socket.send(send_data.encode())):
                 print('[*] {}'.format(my_socket.recv(1024).decode()))
                 my_socket.close()
